@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Venta</title>
+</head>
+
+<body>
+    <h1>Registrar Venta</h1>
+    <form th:action="@{/ventas}" th:object="${venta}" method="post">
+        <label for="auto">Seleccionar Auto:</label>
+        <select id="auto" name="auto.id" required>
+            <option value="" disabled selected>Seleccione un auto</option>
+            <option th:each="auto : ${autos}" th:value="${auto.id}" th:text="${auto.marca + ' ' + auto.modelo}">
+            </option>
+        </select>
+        <br><br>
+
+        <label for="vendedor">Seleccionar Vendedor:</label>
+        <select id="vendedor" name="vendedor.id" required>
+            <option value="" disabled selected>Seleccione un vendedor</option>
+            <option th:each="vendedor : ${vendedores}" th:value="${vendedor.id}"
+                th:text="${vendedor.nombre + ' ' + vendedor.apellido}"></option>
+        </select>
+        <br><br>
+
+        <label for="fecha">Fecha de Venta:</label>
+        <input type="date" id="fecha" name="fecha" th:value="${#dates.format(venta.fecha, 'yyyy-MM-dd')}" required>
+        <br><br>
+
+        <label for="precioFinal">Precio Final:</label>
+        <input type="number" id="precioFinal" name="precioFinal" step="0.01" required>
+        <br><br>
+
+        <button type="submit">Registrar Venta</button>
+    </form>
+</body>
+
+</html>

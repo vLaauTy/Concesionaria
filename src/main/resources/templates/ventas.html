@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ventas</title>
+</head>
+
+<body>
+    <h1>Listado de Ventas</h1>
+    <a th:href="@{/ventas/nuevo}">Registrar nueva venta</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Auto</th>
+                <th>Vendedor</th>
+                <th>Fecha</th>
+                <th>Precio Final</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="venta : ${ventas}">
+                <td th:text="${venta.auto.marca + ' ' + venta.auto.modelo}"></td>
+                <td th:text="${venta.vendedor.nombre + ' ' + venta.vendedor.apellido}"></td>
+                <td th:text="${venta.fecha}"></td>
+                <td th:text="${venta.precioFinal}"></td>
+                <td>
+                    <a th:href="@{/ventas/editar/{id}(id=${venta.id})}">Editar</a>
+                    <a th:href="@{/ventas/eliminar/{id}(id=${venta.id})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
